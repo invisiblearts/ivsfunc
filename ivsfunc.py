@@ -31,13 +31,16 @@ def get_array(src, frame_num, HWC=True):
 
 # The preview is done in a ipython/jupyter environment inline; thus IPython is required.
 def preview_frame(src, frame_num, **kwargs):
-    from IPython import get_ipython
+    from IPython.display import display, Image
     from mvsfunc import Preview
-    from matplotlib import pyplot as plt
-    get_ipython().run_line_magic('matplotlib', 'inline')
-    
+    from scipy.misc import imsave
+    from io import BytesIO
+
     if src.format.color_family is not vs.GRAY:
         src = Preview(src, **kwargs)
     
     arr = get_array(src, frame_num)
-    plt.imshow(arr)
+
+    f = BytesIO()
+    imsave(f, arr, 'png')
+    display(Image(f.getvalue()))
