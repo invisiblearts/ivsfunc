@@ -28,3 +28,16 @@ def get_array(src, frame_num, HWC=True):
     else:
         return np.array(out_list)
 
+
+# The preview is done in a ipython/jupyter environment inline; thus IPython is required.
+def preview_frame(src, frame_num, **kwargs):
+    from IPython import get_ipython
+    from mvsfunc import Preview
+    from matplotlib import pyplot as plt
+    get_ipython().run_line_magic('matplotlib', 'inline')
+    
+    if src.format.color_family is not vs.GRAY:
+        src = Preview(src, **kwargs)
+    
+    arr = get_array(src, frame_num)
+    plt.imshow(arr)
