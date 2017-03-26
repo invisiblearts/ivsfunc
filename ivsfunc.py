@@ -47,13 +47,19 @@ def get_array(src, frame_num, HWC=True):
     else:
         return np.array(out_list)
 
+def display_array(arr)
+    from IPython.display import display, Image
+    from io import BytesIO
+    from scipy.misc import imsave
+    
+    f = BytesIO()
+    imsave(f, arr, 'png')
+    display(Image(f.getvalue()))
+    
 
 # The preview is done in a ipython/jupyter environment inline; thus IPython is required.
 def preview_frame(src, frame_num, **kwargs):
-    from IPython.display import display, Image
     from mvsfunc import Preview
-    from scipy.misc import imsave
-    from io import BytesIO
 
     assert(isinstance(src, vs.VideoNode))
     assert(isinstance(frame_num, int))
@@ -62,7 +68,4 @@ def preview_frame(src, frame_num, **kwargs):
         src = Preview(src, **kwargs)
     
     arr = get_array(src, frame_num)
-
-    f = BytesIO()
-    imsave(f, arr, 'png')
-    display(Image(f.getvalue()))
+    display_array(arr)
