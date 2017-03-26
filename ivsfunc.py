@@ -47,7 +47,7 @@ def get_array(src, frame_num, HWC=True):
     else:
         return np.array(out_list)
 
-def display_array(arr)
+def display_array(arr):
     from IPython.display import display, Image
     from io import BytesIO
     from scipy.misc import imsave
