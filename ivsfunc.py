@@ -1,6 +1,5 @@
 import vapoursynth as vs
 import numpy as np
-import ctypes
 
 # CHW if not HWC
 def get_array(src, frame_num, HWC=True):
